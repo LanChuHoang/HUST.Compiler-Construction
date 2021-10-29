@@ -25,7 +25,7 @@ extern CharCode charCodes[];
 /***************************************************************/
 
 void skipBlank(void) {
-    while (charCodes[currentChar] != TK_EOF && charCodes[currentChar] == CHAR_SPACE) {
+    while (currentChar != EOF && charCodes[currentChar] == CHAR_SPACE) {
         readChar();
     }
 }
@@ -94,7 +94,7 @@ Token* readConstChar(void) {
     readChar();
     if (currentChar == EOF) {
         token->tokenType = TK_NONE;
-        error(ERR_INVALIDCHARCONSTANT, lineNo, colNo);
+        error(ERR_INVALIDCHARCONSTANT, token->lineNo, token->colNo);
         return token;
     }
     // Else -> store the char
@@ -108,7 +108,7 @@ Token* readConstChar(void) {
         readChar();
     } else {
         token->tokenType = TK_NONE;
-        error(ERR_INVALIDCHARCONSTANT, lineNo, colNo);
+        error(ERR_INVALIDCHARCONSTANT, token->lineNo, token->colNo);
     }
     return token;
 }
@@ -116,8 +116,9 @@ Token* readConstChar(void) {
 Token* getToken(void) {
     Token *token;
     
-    if (currentChar == EOF)
+    if (currentChar == EOF) {
         return makeToken(TK_EOF, lineNo, colNo);
+    }
     
     switch (charCodes[currentChar]) {
         case CHAR_SPACE: skipBlank(); return getToken();
@@ -197,7 +198,7 @@ Token* getToken(void) {
                 readChar();
             } else {
                 // invalid "!"
-                error(ERR_INVALIDSYMBOL, lineNo, colNo);
+                error(ERR_INVALIDSYMBOL, token->lineNo, token->colNo);
             }
             return token;
         case CHAR_LPAR:             // "(" or "(." or "(*"
@@ -214,10 +215,7 @@ Token* getToken(void) {
                     return token;
             }
             break;
-            
-        case CHAR_UNKNOWN:
-            readChar();
-            return getToken();
+        
         default:
             token = makeToken(TK_NONE, lineNo, colNo);
             error(ERR_INVALIDSYMBOL, lineNo, colNo);
@@ -320,6 +318,65 @@ void printFile(char* fileName) {
     fclose(fp);
 }
 
+void scanAndWriteResult(int number, char* filePath, char* myResultPath) {
+    filePath[strlen(filePath) - 5] = number;
+    myResultPath[strlen(myResultPath) - 5] = number;
+    FILE *fp = freopen(myResultPath, "w", stdout);
+    scan(filePath);
+    fclose(fp);
+}
+
+int compareLineByLine(char*  fileName1, char* fileName2) {
+    FILE* file1 = fopen(fileName1, "r");
+    FILE* file2 = fopen(fileName2, "r");
+    if (file1 == NULL) {
+        printf("Cannot open %s\n", fileName1);
+        return 0;
+    }
+    if (file2 == NULL) {
+        printf("Cannot open %s\n", fileName2);
+        return 0;
+    }
+    
+    int isEqual = 1;
+    char line1[1000];
+    char line2[1000];
+    while(fgets(line1, 1000, file1) && fgets(line2, 1000, file2)) {
+        isEqual = strcmp(line1, line2) == 0;
+        if (!isEqual) {
+            printf("%s%s-->Not Equal\n\n", line1, line2);
+        }
+    }
+    
+    while (fgets(line1, 1000, file1)) {
+        printf("FILE1: %sFILE2: NULL\n-->Not Equal\n\n", line1);
+    }
+    while (fgets(line2, 1000, file2)) {
+        printf("FILE1: NULLFILE2: %s-->Not Equal\n\n", line1);
+    }
+    
+    if (isEqual) printf("==>Same\n"); else printf("==>Not same\n");
+    return isEqual;
+}
+
+void test(void) {
+    char myResultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/myResult1.txt";
+    char filePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/example7.kpl";
+    char solutionPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/result7.txt";
+    
+//    for(char i = '1'; i <= '7'; ++i) {
+//        scanAndWriteResult(i, filePath, myResultPath);
+//    }
+    
+    for(char i = '1'; i <= '7'; ++i) {
+        myResultPath[strlen(myResultPath) - 5] = i;
+        solutionPath[strlen(solutionPath) - 5] = i;
+
+        printf("\nCompare %c\n", i);
+        compareLineByLine(myResultPath, solutionPath);
+    }
+}
+
 int main(int argc, char *argv[]) {
 //    if (argc <= 1) {
 //        printf("scanner: no input file.\n");
@@ -330,14 +387,6 @@ int main(int argc, char *argv[]) {
 //        printf("Can\'t read input file!\n");
 //        return -1;
 //    }
-    
-    char filePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/example2.kpl";
-    char resultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/result2.txt";
-    printFile(filePath);
-    scan(filePath);
-    
-    printf("\n\n\n");
-    printFile(resultPath);
-    
+    test();
     return 0;
 }
