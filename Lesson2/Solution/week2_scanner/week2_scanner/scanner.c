@@ -73,15 +73,29 @@ Token* readIdentKeyword(void) {
 }
 
 Token* readNumber(void) {
+    // NOTE: currentChar is a number
     Token* token = makeToken(TK_NUMBER, lineNo, colNo);
+    
+    int numDot = 0;
     int i = 0;
-    while (charCodes[currentChar] == CHAR_DIGIT) {
+    while (charCodes[currentChar] == CHAR_DIGIT || (charCodes[currentChar] == CHAR_PERIOD && numDot == 0)) {
+        if (charCodes[currentChar] == CHAR_PERIOD) {
+            numDot++;
+        }
         token->string[i] = currentChar;
         readChar();
         i++;
     }
+    if (charCodes[token->string[i-1]] != CHAR_DIGIT) {
+        error(ERR_INVALIDNUMBER, lineNo, colNo);
+    }
+    
     token->string[i] = '\0';
-    token->value = atoi(token->string);
+    token->value = numDot == 0 ? atoi(token->string) : atof(token->string);
+    
+    if (numDot == 1) {
+        token->tokenType = TK_FLOAT;
+    }
     return token;
 }
 
@@ -150,6 +164,12 @@ Token* getToken(void) {
             break;
         case CHAR_RPAR:             // ")"
             token = makeToken(SB_RPAR, lineNo, colNo);
+            break;
+        case CHAR_LBRACKET:
+            token = makeToken(SB_LBRACKET, lineNo, colNo);
+            break;
+        case CHAR_RBRACKET:
+            token = makeToken(SB_RBRACKET, lineNo, colNo);
             break;
             
         // Group 2: Symbols that have n cases
@@ -238,6 +258,7 @@ void printToken(Token *token) {
         case TK_NUMBER: printf("TK_NUMBER(%s)\n", token->string); break;
         case TK_CHAR: printf("TK_CHAR(\'%s\')\n", token->string); break;
         case TK_EOF: printf("TK_EOF\n"); break;
+        case TK_FLOAT: printf("TK_FLOAT(\'%s %f\')\n", token->string, token->value); break;
             
         case KW_PROGRAM: printf("KW_PROGRAM\n"); break;
         case KW_CONST: printf("KW_CONST\n"); break;
@@ -259,6 +280,7 @@ void printToken(Token *token) {
         case KW_DO: printf("KW_DO\n"); break;
         case KW_FOR: printf("KW_FOR\n"); break;
         case KW_TO: printf("KW_TO\n"); break;
+        case KW_FLOAT: printf("KW_FLOAT\n"); break;
             
         case SB_SEMICOLON: printf("SB_SEMICOLON\n"); break;
         case SB_COLON: printf("SB_COLON\n"); break;
@@ -279,6 +301,8 @@ void printToken(Token *token) {
         case SB_RPAR: printf("SB_RPAR\n"); break;
         case SB_LSEL: printf("SB_LSEL\n"); break;
         case SB_RSEL: printf("SB_RSEL\n"); break;
+        case SB_LBRACKET: printf("SB_LBRACKET\n"); break;
+        case SB_RBRACKET: printf("SB_RBRACKET\n"); break;
     }
 }
 
@@ -360,21 +384,23 @@ int compareLineByLine(char*  fileName1, char* fileName2) {
 }
 
 void test(void) {
-    char myResultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/myResult1.txt";
-    char filePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/example7.kpl";
+    char myResultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/myResult7.txt";
+    char filePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/example8.kpl";
     char solutionPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/result7.txt";
     
 //    for(char i = '1'; i <= '7'; ++i) {
 //        scanAndWriteResult(i, filePath, myResultPath);
 //    }
     
-    for(char i = '1'; i <= '7'; ++i) {
-        myResultPath[strlen(myResultPath) - 5] = i;
-        solutionPath[strlen(solutionPath) - 5] = i;
-
-        printf("\nCompare %c\n", i);
-        compareLineByLine(myResultPath, solutionPath);
-    }
+//    for(char i = '1'; i <= '7'; ++i) {
+//        myResultPath[strlen(myResultPath) - 5] = i;
+//        solutionPath[strlen(solutionPath) - 5] = i;
+//
+//        printf("\nCompare %c\n", i);
+//        compareLineByLine(myResultPath, solutionPath);
+//    }
+    
+    scan(filePath);
 }
 
 int main(int argc, char *argv[]) {
@@ -387,6 +413,9 @@ int main(int argc, char *argv[]) {
 //        printf("Can\'t read input file!\n");
 //        return -1;
 //    }
+    
     test();
+    
+//    printf("%d %d", '[', ']');
     return 0;
 }
