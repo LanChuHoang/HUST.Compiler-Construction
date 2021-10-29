@@ -51,6 +51,14 @@
 		66008A9E2717067C00163675 /* result1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result1.txt; sourceTree = "<group>"; };
 		66008A9F2717067C00163675 /* result2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result2.txt; sourceTree = "<group>"; };
 		66008AA02717067C00163675 /* result3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result3.txt; sourceTree = "<group>"; };
+		668C8365272AB19B00658BE9 /* result.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result.txt; sourceTree = "<group>"; };
+		668C8367272BC8BC00658BE9 /* myResult6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = myResult6.txt; sourceTree = "<group>"; };
+		668C8368272BC8BC00658BE9 /* myResult4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = myResult4.txt; sourceTree = "<group>"; };
+		668C8369272BC8BC00658BE9 /* myResult5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = myResult5.txt; sourceTree = "<group>"; };
+		668C836A272BC8BC00658BE9 /* myResult7.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = myResult7.txt; sourceTree = "<group>"; };
+		668C836B272BCBD900658BE9 /* myResult3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = myResult3.txt; sourceTree = "<group>"; };
+		668C836C272BCBD900658BE9 /* myResult1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = myResult1.txt; sourceTree = "<group>"; };
+		668C836D272BCBD900658BE9 /* myResult2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = myResult2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +122,14 @@
 				66008A9E2717067C00163675 /* result1.txt */,
 				66008A9F2717067C00163675 /* result2.txt */,
 				66008AA02717067C00163675 /* result3.txt */,
+				668C8365272AB19B00658BE9 /* result.txt */,
+				668C8368272BC8BC00658BE9 /* myResult4.txt */,
+				668C8369272BC8BC00658BE9 /* myResult5.txt */,
+				668C8367272BC8BC00658BE9 /* myResult6.txt */,
+				668C836A272BC8BC00658BE9 /* myResult7.txt */,
+				668C836C272BCBD900658BE9 /* myResult1.txt */,
+				668C836D272BCBD900658BE9 /* myResult2.txt */,
+				668C836B272BCBD900658BE9 /* myResult3.txt */,
 			);
 			path = test;
 			sourceTree = "<group>";
