@@ -1,0 +1,11 @@
+Program Example9; (* Example Percent *)
+VAR n: integer;
+    f: float;
+BEGIN
+n := n%4;
+f := 3.1416;
+f += 2.1;
+f -= 4.5;
+f /= 2.7
+f *= 4.5;
+End. (* Example Percent *)

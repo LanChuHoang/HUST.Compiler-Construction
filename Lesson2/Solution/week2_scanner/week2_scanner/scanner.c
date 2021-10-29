@@ -141,18 +141,6 @@ Token* getToken(void) {
         case CHAR_SINGLEQUOTE: return readConstChar();
             
         // Group 1: Symbols that have 1 case
-        case CHAR_PLUS:             // "+"
-            token = makeToken(SB_PLUS, lineNo, colNo);
-            break;
-        case CHAR_MINUS:            // "-"
-            token = makeToken(SB_MINUS, lineNo, colNo);
-            break;
-        case CHAR_TIMES:            // "*"
-            token = makeToken(SB_TIMES, lineNo, colNo);
-            break;
-        case CHAR_SLASH:            // "/"
-            token = makeToken(SB_SLASH, lineNo, colNo);
-            break;
         case CHAR_EQ:               // "="
             token = makeToken(SB_EQ, lineNo, colNo);
             break;
@@ -171,8 +159,47 @@ Token* getToken(void) {
         case CHAR_RBRACKET:
             token = makeToken(SB_RBRACKET, lineNo, colNo);
             break;
+        case CHAR_PERCENT:
+            token = makeToken(SB_MOD, lineNo, colNo);
+            break;
             
         // Group 2: Symbols that have n cases
+        case CHAR_PLUS:             // "+" or "+="
+            token = makeToken(SB_PLUS, lineNo, colNo);
+            readChar();
+            if (charCodes[currentChar] == CHAR_EQ) {
+                // "+="
+                token->tokenType = SB_ASSIGN_PLUS;
+                readChar();
+            }
+            return token;
+        case CHAR_MINUS:             // "-" or "-="
+            token = makeToken(SB_MINUS, lineNo, colNo);
+            readChar();
+            if (charCodes[currentChar] == CHAR_EQ) {
+                // "-="
+                token->tokenType = SB_ASSIGN_SUBTRACT;
+                readChar();
+            }
+            return token;
+        case CHAR_TIMES:             // "*" or "*="
+            token = makeToken(SB_TIMES, lineNo, colNo);
+            readChar();
+            if (charCodes[currentChar] == CHAR_EQ) {
+                // "*="
+                token->tokenType = SB_ASSIGN_TIMES;
+                readChar();
+            }
+            return token;
+        case CHAR_SLASH:             // "/" or "/="
+            token = makeToken(SB_SLASH, lineNo, colNo);
+            readChar();
+            if (charCodes[currentChar] == CHAR_EQ) {
+                // "/="
+                token->tokenType = SB_ASSIGN_DIVIDE;
+                readChar();
+            }
+            return token;
         case CHAR_LT:               // "<" or "<="
             token = makeToken(SB_LT, lineNo, colNo);
             readChar();
@@ -258,7 +285,7 @@ void printToken(Token *token) {
         case TK_NUMBER: printf("TK_NUMBER(%s)\n", token->string); break;
         case TK_CHAR: printf("TK_CHAR(\'%s\')\n", token->string); break;
         case TK_EOF: printf("TK_EOF\n"); break;
-        case TK_FLOAT: printf("TK_FLOAT(\'%s %f\')\n", token->string, token->value); break;
+        case TK_FLOAT: printf("TK_FLOAT(\'%s\' - %f)\n", token->string, token->value); break;
             
         case KW_PROGRAM: printf("KW_PROGRAM\n"); break;
         case KW_CONST: printf("KW_CONST\n"); break;
@@ -303,6 +330,11 @@ void printToken(Token *token) {
         case SB_RSEL: printf("SB_RSEL\n"); break;
         case SB_LBRACKET: printf("SB_LBRACKET\n"); break;
         case SB_RBRACKET: printf("SB_RBRACKET\n"); break;
+        case SB_MOD: printf("SB_MOD\n"); break;
+        case SB_ASSIGN_PLUS: printf("SB_ASSIGN_PLUS\n"); break;
+        case SB_ASSIGN_SUBTRACT: printf("SB_ASSIGN_SUBTRACT\n"); break;
+        case SB_ASSIGN_DIVIDE: printf("SB_ASSIGN_DIVIDE\n"); break;
+        case SB_ASSIGN_TIMES: printf("SB_ASSIGN_TIMES\n"); break;
     }
 }
 
@@ -385,7 +417,7 @@ int compareLineByLine(char*  fileName1, char* fileName2) {
 
 void test(void) {
     char myResultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/myResult7.txt";
-    char filePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/example8.kpl";
+    char filePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/example9.kpl";
     char solutionPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson2/Solution/week2_scanner/week2_scanner/test/result7.txt";
     
 //    for(char i = '1'; i <= '7'; ++i) {
@@ -416,6 +448,6 @@ int main(int argc, char *argv[]) {
     
     test();
     
-//    printf("%d %d", '[', ']');
+//    printf("%d %d %d", '%', charCodes['%'], CHAR_PERCENT);
     return 0;
 }
