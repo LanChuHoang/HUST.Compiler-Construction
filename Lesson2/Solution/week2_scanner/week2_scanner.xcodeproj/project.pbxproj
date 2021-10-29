@@ -60,6 +60,7 @@
 		668C836C272BCBD900658BE9 /* myResult1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = myResult1.txt; sourceTree = "<group>"; };
 		668C836D272BCBD900658BE9 /* myResult2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = myResult2.txt; sourceTree = "<group>"; };
 		668C8370272BF61F00658BE9 /* example8.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example8.kpl; sourceTree = "<group>"; };
+		668C8371272C002B00658BE9 /* example9.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example9.kpl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +118,7 @@
 				66008A982717067C00163675 /* example3.kpl */,
 				66008A992717067C00163675 /* example1.kpl */,
 				668C8370272BF61F00658BE9 /* example8.kpl */,
+				668C8371272C002B00658BE9 /* example9.kpl */,
 				66008A9A2717067C00163675 /* result7.txt */,
 				66008A9B2717067C00163675 /* result6.txt */,
 				66008A9C2717067C00163675 /* result4.txt */,
