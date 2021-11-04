@@ -22,12 +22,12 @@ extern CharCode charCodes[];
 
 /***************************************************************/
 
-void skipBlank() {
+void skipBlank(void) {
     while ((currentChar != EOF) && (charCodes[currentChar] == CHAR_SPACE))
         readChar();
 }
 
-void skipComment() {
+void skipComment(void) {
     int state = 0;
     while ((currentChar != EOF) && (state < 2)) {
         switch (charCodes[currentChar]) {

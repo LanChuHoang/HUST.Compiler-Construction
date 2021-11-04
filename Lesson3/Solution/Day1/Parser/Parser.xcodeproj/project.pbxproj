@@ -57,6 +57,7 @@
 		66EA8B2927341C5400D21216 /* example4.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example4.kpl; sourceTree = "<group>"; };
 		66EA8B2A27341C5400D21216 /* result5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result5.txt; sourceTree = "<group>"; };
 		66EA8B2B27341C5400D21216 /* example5.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example5.kpl; sourceTree = "<group>"; };
+		66EA8B2C2734396B00D21216 /* tempResult.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tempResult.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +133,7 @@
 				66EA8B2A27341C5400D21216 /* result5.txt */,
 				66EA8B2227341C5400D21216 /* result6.txt */,
 				66EA8B2727341C5400D21216 /* result7.txt */,
+				66EA8B2C2734396B00D21216 /* tempResult.txt */,
 			);
 			path = "Test Cases";
 			sourceTree = "<group>";

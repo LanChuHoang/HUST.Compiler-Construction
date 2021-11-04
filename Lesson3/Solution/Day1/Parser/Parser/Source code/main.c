@@ -6,22 +6,91 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "reader.h"
 #include "parser.h"
 
 /******************************************************************/
 
-int main(int argc, char *argv[]) {
-    if (argc <= 1) {
-        printf("parser: no input file.\n");
-        return -1;
+void printFile(char* fileName) {
+    FILE *fp;
+    if ((fp = fopen(fileName, "r")) == NULL) {
+        printf("Cannot open %s\n", fileName);
+        return;
     }
     
-    if (compile(argv[1]) == IO_ERROR) {
-        printf("Can\'t read input file!\n");
-        return -1;
+    char c;
+    while((c = fgetc(fp)) != EOF) {
+        printf("%c", c);
     }
+    printf("\n");
+    
+    fclose(fp);
+}
+
+void compileAndWriteToFile(int number, char* filePath, char* myResultPath) {
+//    filePath[strlen(filePath) - 5] = number;
+//    myResultPath[strlen(myResultPath) - 5] = number;
+    FILE *fp = freopen(myResultPath, "w", stdout);
+    compile(filePath);
+    fclose(fp);
+}
+
+int compareLineByLine(char* fileName1, char* fileName2) {
+    FILE* file1 = fopen(fileName1, "r");
+    FILE* file2 = fopen(fileName2, "r");
+    if (file1 == NULL) {
+        printf("Cannot open %s\n", fileName1);
+        return 0;
+    }
+    if (file2 == NULL) {
+        printf("Cannot open %s\n", fileName2);
+        return 0;
+    }
+    
+    int lineNo = 0;
+    int isEqual = 1;
+    char line1[1000];
+    char line2[1000];
+    while(fgets(line1, 1000, file1) && fgets(line2, 1000, file2)) {
+        lineNo++;
+        isEqual = strcmp(line1, line2) == 0;
+        if (!isEqual) {
+            printf("%d\n%s%s-->Not Equal\n\n", lineNo, line1, line2);
+        }
+    }
+    
+    while (fgets(line1, 1000, file1)) {
+        printf("FILE1: %sFILE2: NULL\n-->Not Equal\n\n", line1);
+    }
+    while (fgets(line2, 1000, file2)) {
+        printf("FILE1: NULLFILE2: %s-->Not Equal\n\n", line1);
+    }
+    
+    if (isEqual) printf("==>Same\n"); else printf("==>Not same\n");
+    return isEqual;
+}
+
+void test(void) {
+    char examplePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Solution/Day1/Parser/Parser/Test Cases/example3.kpl";
+    char resultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Solution/Day1/Parser/Parser/Test Cases/result3.txt";
+    char myResultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Solution/Day1/Parser/Parser/Test Cases/tempResult.txt";
+//    compileAndWriteToFile(3, examplePath, myResultPath);
+    compareLineByLine(myResultPath, resultPath);
+}
+
+int main(int argc, char *argv[]) {
+//    if (argc <= 1) {
+//        printf("parser: no input file.\n");
+//        return -1;
+//    }
+//
+//    if (compile(argv[1]) == IO_ERROR) {
+//        printf("Can\'t read input file!\n");
+//        return -1;
+//    }
+    test();
     
     return 0;
 }
