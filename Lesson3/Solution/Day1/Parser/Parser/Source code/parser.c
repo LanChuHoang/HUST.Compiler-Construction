@@ -83,9 +83,10 @@ void compileBlock5(void) {
 
 void compileConstDecls(void) {
     // TODO
-    compileConstDecl();
-    if (lookAhead->tokenType == TK_IDENT)
+    if (lookAhead->tokenType == TK_IDENT) {
+        compileConstDecl();
         compileConstDecls();
+    }
 }
 
 void compileConstDecl(void) {
@@ -98,9 +99,10 @@ void compileConstDecl(void) {
 
 void compileTypeDecls(void) {
     // TODO
-    compileTypeDecl();
-    if (lookAhead->tokenType == TK_IDENT)
+    if (lookAhead->tokenType == TK_IDENT) {
+        compileTypeDecl();
         compileTypeDecls();
+    }
 }
 
 void compileTypeDecl(void) {
@@ -113,9 +115,10 @@ void compileTypeDecl(void) {
 
 void compileVarDecls(void) {
     // TODO
-    compileVarDecl();
-    if (lookAhead->tokenType == TK_IDENT)
+    if (lookAhead->tokenType == TK_IDENT) {
+        compileVarDecl();
         compileVarDecls();
+    }
 }
 
 void compileVarDecl(void) {
@@ -129,10 +132,14 @@ void compileVarDecl(void) {
 void compileSubDecls(void) {
     assert("Parsing subtoutines ....");
     // TODO
-    if (lookAhead->tokenType == KW_FUNCTION)
+    if (lookAhead->tokenType == KW_FUNCTION) {
         compileFuncDecl();
-    else if (lookAhead->tokenType == KW_PROCEDURE)
+        compileSubDecls();
+    }
+    else if (lookAhead->tokenType == KW_PROCEDURE) {
         compileProcDecl();
+        compileSubDecls();
+    }
     assert("Subtoutines parsed ....");
 }
 
@@ -311,6 +318,7 @@ void compileAssignSt(void) {
     assert("Parsing an assign statement ....");
     // TODO
     eat(TK_IDENT);
+    compileIndexes();
     eat(SB_ASSIGN);
     compileExpression();
     assert("Assign statement parsed ....");
@@ -340,14 +348,15 @@ void compileIfSt(void) {
     compileCondition();
     eat(KW_THEN);
     compileStatement();
-    if (lookAhead->tokenType == KW_ELSE) 
-        compileElseSt();
+    compileElseSt();
     assert("If statement parsed ....");
 }
 
 void compileElseSt(void) {
-    eat(KW_ELSE);
-    compileStatement();
+    if (lookAhead->tokenType == KW_ELSE) {
+        eat(KW_ELSE);
+        compileStatement();
+    }
 }
 
 void compileWhileSt(void) {
@@ -356,7 +365,7 @@ void compileWhileSt(void) {
     eat(KW_WHILE);
     compileCondition();
     eat(KW_DO);
-    compileStatements();
+    compileStatement();
     assert("While statement pased ....");
 }
 
@@ -370,7 +379,7 @@ void compileForSt(void) {
     eat(KW_TO);
     compileExpression();
     eat(KW_DO);
-    compileStatements();
+    compileStatement();
     assert("For statement parsed ....");
 }
 
@@ -408,13 +417,11 @@ void compileCondition2(void) {
         case SB_LT:
         case SB_GE:
         case SB_GT:
-        case SB_PLUS:
-        case SB_MINUS:
             eat(lookAhead->tokenType);
             compileExpression();
             break;
         default:
-            compileExpression();
+            error(ERR_INVALIDCOMPARATOR, lookAhead->lineNo, lookAhead->colNo);
             break;
     }
 }
@@ -440,7 +447,6 @@ void compileExpression2(void) {
     compileTerm();
     compileExpression3();
 }
-
 
 void compileExpression3(void) {
     // TODO
