@@ -29,9 +29,7 @@ void printFile(char* fileName) {
     fclose(fp);
 }
 
-void compileAndWriteToFile(int number, char* filePath, char* myResultPath) {
-//    filePath[strlen(filePath) - 5] = number;
-//    myResultPath[strlen(myResultPath) - 5] = number;
+void compileAndWriteToFile(char* filePath, char* myResultPath) {
     FILE *fp = freopen(myResultPath, "w", stdout);
     compile(filePath);
     fclose(fp);
@@ -73,10 +71,10 @@ int compareLineByLine(char* fileName1, char* fileName2) {
 }
 
 void test(void) {
-    char examplePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Solution/Day1/Parser/Parser/Test Cases/example3.kpl";
-    char resultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Solution/Day1/Parser/Parser/Test Cases/result3.txt";
+    char examplePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Solution/Day1/Parser/Parser/Test Cases/example7.kpl";
+    char resultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Solution/Day1/Parser/Parser/Test Cases/result7.txt";
     char myResultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Solution/Day1/Parser/Parser/Test Cases/tempResult.txt";
-//    compileAndWriteToFile(3, examplePath, myResultPath);
+//    compileAndWriteToFile(examplePath, myResultPath);
     compareLineByLine(myResultPath, resultPath);
 }
 
@@ -91,6 +89,5 @@ int main(int argc, char *argv[]) {
 //        return -1;
 //    }
     test();
-    
     return 0;
 }

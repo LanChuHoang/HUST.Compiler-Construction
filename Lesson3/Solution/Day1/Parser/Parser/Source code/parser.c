@@ -269,20 +269,25 @@ void compileParam(void) {
 
 void compileStatements(void) {
     // TODO
+//    assert("Parsing statements");
     compileStatement();
     compileStatements2();
+//    assert("Parsed statements");
 }
 
 void compileStatements2(void) {
     // TODO
-    if(lookAhead->tokenType == SB_SEMICOLON) {
+//    assert("Parsing statements 2");
+    if(lookAhead->tokenType != KW_END) {
         eat(SB_SEMICOLON);
         compileStatement();
         compileStatements2();
     }
+//    assert("Parsed statements 2");
 }
 
 void compileStatement(void) {
+//    assert("Parsing statement");
     switch (lookAhead->tokenType) {
         case TK_IDENT:
             compileAssignSt();
@@ -312,6 +317,7 @@ void compileStatement(void) {
             error(ERR_INVALIDSTATEMENT, lookAhead->lineNo, lookAhead->colNo);
             break;
     }
+//    assert("Parsed statement");
 }
 
 void compileAssignSt(void) {
@@ -366,7 +372,7 @@ void compileWhileSt(void) {
     compileCondition();
     eat(KW_DO);
     compileStatement();
-    assert("While statement pased ....");
+    assert("While statement parsed ....");
 }
 
 void compileForSt(void) {
@@ -466,6 +472,7 @@ void compileTerm(void) {
 void compileTerm2(void) {
     // TODO
     if(lookAhead->tokenType == SB_TIMES || lookAhead->tokenType == SB_SLASH) {
+        eat(lookAhead->tokenType);
         compileFactor();
         compileTerm2();
     }
