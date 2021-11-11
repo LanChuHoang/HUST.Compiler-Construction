@@ -1,0 +1,5 @@
+Program Example8; (* Example Float *)
+VAR f: float;
+BEGIN
+f := 3.1416;
+End. (* Example Float *)
