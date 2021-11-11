@@ -1,5 +1,6 @@
 Program Example8; (* Example Float *)
 VAR f: float;
 BEGIN
-f := 3.1416;
+f := 3.1416 + 6.143 * 0.12 / 6.123;
+f := a[1] + a[2] + a[3];
 End. (* Example Float *)

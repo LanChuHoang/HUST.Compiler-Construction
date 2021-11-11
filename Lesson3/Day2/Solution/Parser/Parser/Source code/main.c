@@ -75,20 +75,20 @@ void test(void) {
     char resultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Day2/Solution/Parser/Parser/Test Cases/result7.txt";
     char myResultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Day2/Solution/Parser/Parser/Test Cases/tempResult.txt";
 //    compileAndWriteToFile(examplePath, myResultPath);
-    compareLineByLine(myResultPath, resultPath);
-//    compile(examplePath);
+//    compareLineByLine(myResultPath, resultPath);
+    compile(examplePath);
 }
 
 int main(int argc, char *argv[]) {
-    if (argc <= 1) {
-        printf("parser: no input file.\n");
-        return -1;
-    }
-
-    if (compile(argv[1]) == IO_ERROR) {
-        printf("Can\'t read input file!\n");
-        return -1;
-    }
-//    test();
+//    if (argc <= 1) {
+//        printf("parser: no input file.\n");
+//        return -1;
+//    }
+//
+//    if (compile(argv[1]) == IO_ERROR) {
+//        printf("Can\'t read input file!\n");
+//        return -1;
+//    }
+    test();
     return 0;
 }

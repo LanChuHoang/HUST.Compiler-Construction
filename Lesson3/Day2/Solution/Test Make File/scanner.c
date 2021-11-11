@@ -88,7 +88,7 @@ Token* readNumber(void) {
         readChar();
         i++;
     }
-    if (charCodes[token->string[i-1]] != CHAR_DIGIT) {
+    if (charCodes[(int)token->string[i-1]] != CHAR_DIGIT) {
         error(ERR_INVALIDFLOATNUMBER, lineNo, colNo);
     }
     
