@@ -29,6 +29,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		66464A5D2745EAEF0012663D /* example9.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example9.kpl; sourceTree = "<group>"; };
+		66464A5F2745F9BA0012663D /* example2.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example2.kpl; sourceTree = "<group>"; };
+		66464A602745F9BA0012663D /* example3.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example3.kpl; sourceTree = "<group>"; };
+		66464A612745F9BA0012663D /* example6.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example6.kpl; sourceTree = "<group>"; };
+		66464A622745F9BA0012663D /* example1.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example1.kpl; sourceTree = "<group>"; };
+		66464A632745F9BA0012663D /* example7.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example7.kpl; sourceTree = "<group>"; };
+		66464A642745F9BA0012663D /* example5.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example5.kpl; sourceTree = "<group>"; };
+		66464A652745F9BA0012663D /* example4.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example4.kpl; sourceTree = "<group>"; };
+		66464A662745FD3B0012663D /* result9.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result9.txt; sourceTree = "<group>"; };
+		66464A672745FD3B0012663D /* result8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result8.txt; sourceTree = "<group>"; };
 		66E37082273CB728007B5367 /* example8.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example8.kpl; sourceTree = "<group>"; };
 		66EA8AEF27341B7D00D21216 /* Parser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Parser; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EA8AF927341BF700D21216 /* charcode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = charcode.c; sourceTree = "<group>"; };
@@ -45,19 +55,12 @@
 		66EA8B0427341BF700D21216 /* reader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reader.c; sourceTree = "<group>"; };
 		66EA8B0527341BF700D21216 /* token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = token.h; sourceTree = "<group>"; };
 		66EA8B1E27341C5400D21216 /* result1.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result1.txt; sourceTree = "<group>"; };
-		66EA8B1F27341C5400D21216 /* example6.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example6.kpl; sourceTree = "<group>"; };
 		66EA8B2027341C5400D21216 /* result3.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result3.txt; sourceTree = "<group>"; };
-		66EA8B2127341C5400D21216 /* example1.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example1.kpl; sourceTree = "<group>"; };
 		66EA8B2227341C5400D21216 /* result6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result6.txt; sourceTree = "<group>"; };
 		66EA8B2327341C5400D21216 /* result4.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result4.txt; sourceTree = "<group>"; };
 		66EA8B2427341C5400D21216 /* result2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result2.txt; sourceTree = "<group>"; };
-		66EA8B2527341C5400D21216 /* example3.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example3.kpl; sourceTree = "<group>"; };
-		66EA8B2627341C5400D21216 /* example7.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example7.kpl; sourceTree = "<group>"; };
 		66EA8B2727341C5400D21216 /* result7.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result7.txt; sourceTree = "<group>"; };
-		66EA8B2827341C5400D21216 /* example2.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example2.kpl; sourceTree = "<group>"; };
-		66EA8B2927341C5400D21216 /* example4.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example4.kpl; sourceTree = "<group>"; };
 		66EA8B2A27341C5400D21216 /* result5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = result5.txt; sourceTree = "<group>"; };
-		66EA8B2B27341C5400D21216 /* example5.kpl */ = {isa = PBXFileReference; lastKnownFileType = text; path = example5.kpl; sourceTree = "<group>"; };
 		66EA8B2C2734396B00D21216 /* tempResult.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = tempResult.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,14 +123,15 @@
 		66EA8B0F27341C1700D21216 /* Test Cases */ = {
 			isa = PBXGroup;
 			children = (
-				66EA8B2127341C5400D21216 /* example1.kpl */,
-				66EA8B2827341C5400D21216 /* example2.kpl */,
-				66EA8B2527341C5400D21216 /* example3.kpl */,
-				66EA8B2927341C5400D21216 /* example4.kpl */,
-				66EA8B2B27341C5400D21216 /* example5.kpl */,
-				66EA8B1F27341C5400D21216 /* example6.kpl */,
-				66EA8B2627341C5400D21216 /* example7.kpl */,
+				66464A622745F9BA0012663D /* example1.kpl */,
+				66464A5F2745F9BA0012663D /* example2.kpl */,
+				66464A602745F9BA0012663D /* example3.kpl */,
+				66464A652745F9BA0012663D /* example4.kpl */,
+				66464A642745F9BA0012663D /* example5.kpl */,
+				66464A612745F9BA0012663D /* example6.kpl */,
+				66464A632745F9BA0012663D /* example7.kpl */,
 				66E37082273CB728007B5367 /* example8.kpl */,
+				66464A5D2745EAEF0012663D /* example9.kpl */,
 				66EA8B1E27341C5400D21216 /* result1.txt */,
 				66EA8B2427341C5400D21216 /* result2.txt */,
 				66EA8B2027341C5400D21216 /* result3.txt */,
@@ -135,6 +139,8 @@
 				66EA8B2A27341C5400D21216 /* result5.txt */,
 				66EA8B2227341C5400D21216 /* result6.txt */,
 				66EA8B2727341C5400D21216 /* result7.txt */,
+				66464A672745FD3B0012663D /* result8.txt */,
+				66464A662745FD3B0012663D /* result9.txt */,
 				66EA8B2C2734396B00D21216 /* tempResult.txt */,
 			);
 			path = "Test Cases";

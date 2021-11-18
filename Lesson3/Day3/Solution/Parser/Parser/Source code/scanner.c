@@ -142,22 +142,38 @@ Token* getToken(void) {
         case CHAR_SPACE: skipBlank(); return getToken();
         case CHAR_LETTER: return readIdentKeyword();
         case CHAR_DIGIT: return readNumber();
-        case CHAR_PLUS: 
-            token = makeToken(SB_PLUS, lineNo, colNo);
-            readChar(); 
-            return token;
+        case CHAR_PLUS:
+            ln = lineNo;
+            cn = colNo;
+            readChar();
+            if ((currentChar != EOF) && (charCodes[currentChar] == CHAR_EQ)) {
+                readChar();
+                return makeToken(SB_ASSIGN_PLUS, ln, cn);
+            } else return makeToken(SB_PLUS, ln, cn);
         case CHAR_MINUS:
-            token = makeToken(SB_MINUS, lineNo, colNo);
-            readChar(); 
-            return token;
+            ln = lineNo;
+            cn = colNo;
+            readChar();
+            if ((currentChar != EOF) && (charCodes[currentChar] == CHAR_EQ)) {
+                readChar();
+                return makeToken(SB_ASSIGN_SUBTRACT, ln, cn);
+            } else return makeToken(SB_MINUS, ln, cn);
         case CHAR_TIMES:
-            token = makeToken(SB_TIMES, lineNo, colNo);
-            readChar(); 
-            return token;
+            ln = lineNo;
+            cn = colNo;
+            readChar();
+            if ((currentChar != EOF) && (charCodes[currentChar] == CHAR_EQ)) {
+                readChar();
+                return makeToken(SB_ASSIGN_TIMES, ln, cn);
+            } else return makeToken(SB_TIMES, ln, cn);
         case CHAR_SLASH:
-            token = makeToken(SB_SLASH, lineNo, colNo);
-            readChar(); 
-            return token;
+            ln = lineNo;
+            cn = colNo;
+            readChar();
+            if ((currentChar != EOF) && (charCodes[currentChar] == CHAR_EQ)) {
+                readChar();
+                return makeToken(SB_ASSIGN_DIVIDE, ln, cn);
+            } else return makeToken(SB_SLASH, ln, cn);
         case CHAR_LT:
             ln = lineNo;
             cn = colNo;
@@ -246,6 +262,10 @@ Token* getToken(void) {
             token = makeToken(SB_RBRACKET, lineNo, colNo);
             readChar();
             return token;
+        case CHAR_PERCENT:
+            token = makeToken(SB_MOD, lineNo, colNo);
+            readChar();
+            return token;
         default:
             token = makeToken(TK_NONE, lineNo, colNo);
             error(ERR_INVALIDSYMBOL, lineNo, colNo);
@@ -321,6 +341,11 @@ void printToken(Token *token) {
         case SB_RSEL: printf("SB_RSEL\n"); break;
         case SB_LBRACKET: printf("SB_LBRACKET\n"); break;
         case SB_RBRACKET: printf("SB_RBRACKET\n"); break;
+        case SB_MOD: printf("SB_MOD\n"); break;
+        case SB_ASSIGN_PLUS: printf("SB_ASSIGN_PLUS\n"); break;
+        case SB_ASSIGN_SUBTRACT: printf("SB_ASSIGN_SUBTRACT\n"); break;
+        case SB_ASSIGN_DIVIDE: printf("SB_ASSIGN_DIVIDE\n"); break;
+        case SB_ASSIGN_TIMES: printf("SB_ASSIGN_TIMES\n"); break;
     }
 }
 

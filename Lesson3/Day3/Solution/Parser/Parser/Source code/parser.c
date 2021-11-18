@@ -82,7 +82,6 @@ void compileBlock5(void) {
 }
 
 void compileConstDecls(void) {
-    // TODO
     if (lookAhead->tokenType == TK_IDENT) {
         compileConstDecl();
         compileConstDecls();
@@ -90,7 +89,6 @@ void compileConstDecls(void) {
 }
 
 void compileConstDecl(void) {
-    // TODO
     eat(TK_IDENT);
     eat(SB_EQ);
     compileConstant();
@@ -98,7 +96,6 @@ void compileConstDecl(void) {
 }
 
 void compileTypeDecls(void) {
-    // TODO
     if (lookAhead->tokenType == TK_IDENT) {
         compileTypeDecl();
         compileTypeDecls();
@@ -106,7 +103,6 @@ void compileTypeDecls(void) {
 }
 
 void compileTypeDecl(void) {
-    // TODO
     eat(TK_IDENT);
     eat(SB_EQ);
     compileType();
@@ -114,7 +110,6 @@ void compileTypeDecl(void) {
 }
 
 void compileVarDecls(void) {
-    // TODO
     if (lookAhead->tokenType == TK_IDENT) {
         compileVarDecl();
         compileVarDecls();
@@ -122,7 +117,6 @@ void compileVarDecls(void) {
 }
 
 void compileVarDecl(void) {
-    // TODO
     eat(TK_IDENT);
     eat(SB_COLON);
     compileType();
@@ -131,7 +125,6 @@ void compileVarDecl(void) {
 
 void compileSubDecls(void) {
     assert("Parsing subtoutines ....");
-    // TODO
     if (lookAhead->tokenType == KW_FUNCTION) {
         compileFuncDecl();
         compileSubDecls();
@@ -145,7 +138,6 @@ void compileSubDecls(void) {
 
 void compileFuncDecl(void) {
     assert("Parsing a function ....");
-    // TODO
     eat(KW_FUNCTION);
     eat(TK_IDENT);
     compileParams();
@@ -159,7 +151,6 @@ void compileFuncDecl(void) {
 
 void compileProcDecl(void) {
     assert("Parsing a procedure ....");
-    // TODO
     eat(KW_PROCEDURE);
     eat(TK_IDENT);
     compileParams();
@@ -170,11 +161,10 @@ void compileProcDecl(void) {
 }
 
 void compileUnsignedConstant(void) {
-    // TODO
+    
 }
 
 void compileConstant(void) {
-    // TODO
     switch (lookAhead->tokenType) {
         case SB_PLUS:
             eat(SB_PLUS);
@@ -194,7 +184,6 @@ void compileConstant(void) {
 }
 
 void compileConstant2(void) {
-    // TODO
     if (lookAhead->tokenType == TK_IDENT || lookAhead->tokenType == TK_NUMBER) {
         eat(lookAhead->tokenType);
     } else {
@@ -203,7 +192,6 @@ void compileConstant2(void) {
 }
 
 void compileType(void) {
-    // TODO
     switch (lookAhead->tokenType) {
         case KW_INTEGER:
         case KW_CHAR:
@@ -213,11 +201,19 @@ void compileType(void) {
             break;
         case KW_ARRAY:
             eat(KW_ARRAY);
-            eat(SB_LBRACKET);
-            eat(TK_NUMBER);
-            eat(SB_RBRACKET);
-            eat(KW_OF);
-            compileType();
+            if (lookAhead->tokenType == SB_LBRACKET) {
+                eat(SB_LBRACKET);
+                eat(TK_NUMBER);
+                eat(SB_RBRACKET);
+                eat(KW_OF);
+                compileType();
+            } else if (lookAhead->tokenType == SB_LSEL) {
+                eat(SB_LSEL);
+                eat(TK_NUMBER);
+                eat(SB_RSEL);
+                eat(KW_OF);
+                compileType();
+            }
             break;
         default:
             error(ERR_INVALIDTYPE, lookAhead->lineNo, lookAhead->colNo);
@@ -226,7 +222,6 @@ void compileType(void) {
 }
 
 void compileBasicType(void) {
-    // TODO
     if(lookAhead->tokenType == KW_INTEGER || lookAhead->tokenType == KW_CHAR)
         eat(lookAhead->tokenType);
     else
@@ -234,7 +229,6 @@ void compileBasicType(void) {
 }
 
 void compileParams(void) {
-    // TODO
     if(lookAhead->tokenType == SB_LPAR) {
         eat(SB_LPAR);
         compileParam();
@@ -244,7 +238,6 @@ void compileParams(void) {
 }
 
 void compileParams2(void) {
-    // TODO
     if(lookAhead->tokenType == SB_SEMICOLON) {
         eat(SB_SEMICOLON);
         compileParam();
@@ -253,7 +246,6 @@ void compileParams2(void) {
 }
 
 void compileParam(void) {
-    // TODO
     if (lookAhead->tokenType == TK_IDENT) {
         eat(TK_IDENT);
         eat(SB_COLON);
@@ -269,26 +261,19 @@ void compileParam(void) {
 }
 
 void compileStatements(void) {
-    // TODO
-//    assert("Parsing statements");
     compileStatement();
     compileStatements2();
-//    assert("Parsed statements");
 }
 
 void compileStatements2(void) {
-    // TODO
-//    assert("Parsing statements 2");
     if(lookAhead->tokenType != KW_END) {
         eat(SB_SEMICOLON);
         compileStatement();
         compileStatements2();
     }
-//    assert("Parsed statements 2");
 }
 
 void compileStatement(void) {
-//    assert("Parsing statement");
     switch (lookAhead->tokenType) {
         case TK_IDENT:
             compileAssignSt();
@@ -318,22 +303,35 @@ void compileStatement(void) {
             error(ERR_INVALIDSTATEMENT, lookAhead->lineNo, lookAhead->colNo);
             break;
     }
-//    assert("Parsed statement");
 }
 
 void compileAssignSt(void) {
     assert("Parsing an assign statement ....");
-    // TODO
     eat(TK_IDENT);
     compileIndexes();
-    eat(SB_ASSIGN);
+    switch (lookAhead->tokenType) {
+        case SB_ASSIGN_PLUS:
+            eat(SB_ASSIGN_PLUS);
+            break;
+        case SB_ASSIGN_SUBTRACT:
+            eat(SB_ASSIGN_SUBTRACT);
+            break;
+        case SB_ASSIGN_TIMES:
+            eat(SB_ASSIGN_TIMES);
+            break;
+        case SB_ASSIGN_DIVIDE:
+            eat(SB_ASSIGN_DIVIDE);
+            break;
+        default:
+            eat(SB_ASSIGN);
+            break;
+    }
     compileExpression();
     assert("Assign statement parsed ....");
 }
 
 void compileCallSt(void) {
     assert("Parsing a call statement ....");
-    // TODO
     eat(KW_CALL);
     eat(TK_IDENT);
     compileArguments();
@@ -342,7 +340,6 @@ void compileCallSt(void) {
 
 void compileGroupSt(void) {
     assert("Parsing a group statement ....");
-    // TODO
     eat(KW_BEGIN);
     compileStatements();
     eat(KW_END);
@@ -368,7 +365,6 @@ void compileElseSt(void) {
 
 void compileWhileSt(void) {
     assert("Parsing a while statement ....");
-    // TODO
     eat(KW_WHILE);
     compileCondition();
     eat(KW_DO);
@@ -378,7 +374,6 @@ void compileWhileSt(void) {
 
 void compileForSt(void) {
     assert("Parsing a for statement ....");
-    // TODO
     eat(KW_FOR);
     eat(TK_IDENT);
     eat(SB_ASSIGN);
@@ -391,7 +386,6 @@ void compileForSt(void) {
 }
 
 void compileArguments(void) {
-    // TODO
     switch (lookAhead->tokenType) {
         case SB_LPAR:
             eat(SB_LPAR);
@@ -427,7 +421,6 @@ void compileArguments(void) {
 }
 
 void compileArguments2(void) {
-    // TODO
     if(lookAhead->tokenType == SB_COMMA) {
         eat(SB_COMMA);
         compileExpression();
@@ -436,13 +429,11 @@ void compileArguments2(void) {
 }
 
 void compileCondition(void) {
-    // TODO
     compileExpression();
     compileCondition2();
 }
 
 void compileCondition2(void) {
-    // TODO
     switch (lookAhead->tokenType) {
         case SB_EQ:
         case SB_NEQ:
@@ -461,7 +452,6 @@ void compileCondition2(void) {
 
 void compileExpression(void) {
     assert("Parsing an expression");
-    // TODO
     switch (lookAhead->tokenType) {
         case SB_PLUS:
         case SB_MINUS:
@@ -476,16 +466,11 @@ void compileExpression(void) {
 }
 
 void compileExpression2(void) {
-    // TODO
     compileTerm();
     compileExpression3();
 }
 
 void compileExpression3(void) {
-    // TODO
-    if(lookAhead->tokenType == SB_PLUS || lookAhead->tokenType == SB_MINUS) {
-        
-    }
     switch (lookAhead->tokenType) {
         case SB_PLUS:
         case SB_MINUS:
@@ -517,21 +502,15 @@ void compileExpression3(void) {
 }
 
 void compileTerm(void) {
-    // TODO
     compileFactor();
     compileTerm2();
 }
 
 void compileTerm2(void) {
-    // TODO
-    if(lookAhead->tokenType == SB_TIMES || lookAhead->tokenType == SB_SLASH) {
-        eat(lookAhead->tokenType);
-        compileFactor();
-        compileTerm2();
-    }
     switch (lookAhead->tokenType) {
         case SB_TIMES:
         case SB_SLASH:
+        case SB_MOD:
             eat(lookAhead->tokenType);
             compileFactor();
             compileTerm2();
@@ -562,7 +541,6 @@ void compileTerm2(void) {
 }
 
 void compileFactor(void) {
-    // TODO
     switch (lookAhead->tokenType) {
         case TK_NUMBER:
         case TK_CHAR:
@@ -570,7 +548,7 @@ void compileFactor(void) {
             break;
         case TK_IDENT:
             eat(TK_IDENT);
-            if(lookAhead->tokenType == SB_LBRACKET)
+            if(lookAhead->tokenType == SB_LBRACKET || lookAhead->tokenType == SB_LSEL)
                 compileIndexes();
             else if (lookAhead->tokenType == SB_LPAR)
                 compileArguments();
@@ -590,11 +568,15 @@ void compileFactor(void) {
 }
 
 void compileIndexes(void) {
-    // TODO
     if (lookAhead->tokenType == SB_LBRACKET) {
         eat(SB_LBRACKET);
         compileExpression();
         eat(SB_RBRACKET);
+        compileIndexes();
+    } else if (lookAhead->tokenType == SB_LSEL) {
+        eat(SB_LSEL);
+        compileExpression();
+        eat(SB_RSEL);
         compileIndexes();
     }
 }

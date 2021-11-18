@@ -71,12 +71,12 @@ int compareLineByLine(char* fileName1, char* fileName2) {
 }
 
 void test(void) {
-    char examplePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Day2/Solution/Parser/Parser/Test Cases/example7.kpl";
-    char resultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Day2/Solution/Parser/Parser/Test Cases/result7.txt";
-    char myResultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Day2/Solution/Parser/Parser/Test Cases/tempResult.txt";
+    char examplePath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Day3/Solution/Parser/Parser/Test Cases/example9.kpl";
+    char resultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Day3/Solution/Parser/Parser/Test Cases/result9.txt";
+    char myResultPath[] = "/Users/lanchu/OneDrive/Hust/20211/Compiler Lab/HUST.Compiler-Construction/Lesson3/Day3/Solution/Parser/Parser/Test Cases/tempResult.txt";
 //    compileAndWriteToFile(examplePath, myResultPath);
-//    compareLineByLine(myResultPath, resultPath);
-    compile(examplePath);
+    compareLineByLine(myResultPath, resultPath);
+//    compile("/Users/lanchu/Downloads/example4.kpl");
 }
 
 int main(int argc, char *argv[]) {
