@@ -28,7 +28,8 @@ typedef enum {
     CHAR_RPAR,
     CHAR_UNKNOWN,
     CHAR_LBRACKET,
-    CHAR_RBRACKET
+    CHAR_RBRACKET,
+    CHAR_PERCENT
 } CharCode;
 
 #endif

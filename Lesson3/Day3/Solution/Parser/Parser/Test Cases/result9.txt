@@ -1,0 +1,80 @@
+Parsing a Program ....
+1-1:KW_PROGRAM
+1-9:TK_IDENT(Example9)
+1-17:SB_SEMICOLON
+Parsing a Block ....
+2-1:KW_VAR
+2-5:TK_IDENT(n)
+2-6:SB_COLON
+2-8:KW_INTEGER
+2-15:SB_SEMICOLON
+3-5:TK_IDENT(f)
+3-6:SB_COLON
+3-8:KW_FLOAT
+3-13:SB_SEMICOLON
+Parsing subtoutines ....
+Subtoutines parsed ....
+4-1:KW_BEGIN
+Parsing an assign statement ....
+5-1:TK_IDENT(n)
+5-3:SB_ASSIGN
+Parsing an expression
+5-6:SB_MINUS
+5-7:TK_IDENT(n)
+5-9:SB_PLUS
+5-11:TK_NUMBER(1)
+5-13:SB_TIMES
+5-15:TK_IDENT(n)
+5-17:SB_MOD
+5-19:TK_NUMBER(4)
+5-21:SB_PLUS
+5-23:TK_IDENT(n)
+5-25:SB_SLASH
+5-27:TK_NUMBER(2)
+Expression parsed
+Assign statement parsed ....
+5-28:SB_SEMICOLON
+Parsing an assign statement ....
+6-1:TK_IDENT(f)
+6-3:SB_ASSIGN
+Parsing an expression
+6-6:TK_FLOAT('3.141600')
+Expression parsed
+Assign statement parsed ....
+6-12:SB_SEMICOLON
+Parsing an assign statement ....
+7-1:TK_IDENT(f)
+7-3:SB_ASSIGN_PLUS
+Parsing an expression
+7-6:TK_FLOAT('2.100000')
+Expression parsed
+Assign statement parsed ....
+7-9:SB_SEMICOLON
+Parsing an assign statement ....
+8-1:TK_IDENT(f)
+8-3:SB_ASSIGN_SUBTRACT
+Parsing an expression
+8-6:TK_FLOAT('4.500000')
+Expression parsed
+Assign statement parsed ....
+8-9:SB_SEMICOLON
+Parsing an assign statement ....
+9-1:TK_IDENT(f)
+9-3:SB_ASSIGN_DIVIDE
+Parsing an expression
+9-6:TK_FLOAT('2.700000')
+Expression parsed
+Assign statement parsed ....
+9-9:SB_SEMICOLON
+Parsing an assign statement ....
+10-1:TK_IDENT(f)
+10-3:SB_ASSIGN_TIMES
+Parsing an expression
+10-6:TK_FLOAT('4.500000')
+Expression parsed
+Assign statement parsed ....
+10-9:SB_SEMICOLON
+11-1:KW_END
+Block parsed!
+11-4:SB_PERIOD
+Program parsed!

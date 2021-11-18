@@ -1,0 +1,96 @@
+Parsing a Program ....
+1-1:KW_PROGRAM
+1-9:TK_IDENT(Example8)
+1-17:SB_SEMICOLON
+Parsing a Block ....
+2-1:KW_VAR
+2-5:TK_IDENT(f)
+2-6:SB_COLON
+2-8:KW_FLOAT
+2-13:SB_SEMICOLON
+3-5:TK_IDENT(A)
+3-7:SB_COLON
+3-9:KW_ARRAY
+3-14:SB_LBRACKET
+3-15:TK_NUMBER(10)
+3-17:SB_RBRACKET
+3-19:KW_OF
+3-22:KW_ARRAY
+3-27:SB_LBRACKET
+3-28:TK_NUMBER(11)
+3-30:SB_RBRACKET
+3-32:KW_OF
+3-35:KW_INTEGER
+3-42:SB_SEMICOLON
+4-5:TK_IDENT(B)
+4-7:SB_COLON
+4-9:KW_ARRAY
+4-14:SB_LSEL
+4-17:TK_NUMBER(10)
+4-20:SB_RSEL
+4-23:KW_OF
+4-26:KW_ARRAY
+4-32:SB_LSEL
+4-35:TK_NUMBER(11)
+4-38:SB_RSEL
+4-41:KW_OF
+4-44:KW_INTEGER
+4-51:SB_SEMICOLON
+Parsing subtoutines ....
+Subtoutines parsed ....
+5-1:KW_BEGIN
+Parsing an assign statement ....
+6-1:TK_IDENT(f)
+6-3:SB_ASSIGN
+Parsing an expression
+6-6:TK_FLOAT('3.141600')
+6-13:SB_PLUS
+6-15:TK_FLOAT('6.143000')
+6-21:SB_TIMES
+6-23:TK_FLOAT('0.120000')
+6-28:SB_SLASH
+6-30:TK_FLOAT('6.123000')
+Expression parsed
+Assign statement parsed ....
+6-35:SB_SEMICOLON
+Parsing an assign statement ....
+7-1:TK_IDENT(f)
+7-3:SB_ASSIGN
+Parsing an expression
+7-6:TK_IDENT(a)
+7-7:SB_LBRACKET
+Parsing an expression
+7-8:TK_NUMBER(1)
+Expression parsed
+7-9:SB_RBRACKET
+7-10:SB_LBRACKET
+Parsing an expression
+7-11:TK_NUMBER(2)
+Expression parsed
+7-12:SB_RBRACKET
+7-14:SB_PLUS
+7-16:TK_IDENT(a)
+7-17:SB_LBRACKET
+Parsing an expression
+7-18:TK_NUMBER(2)
+Expression parsed
+7-19:SB_RBRACKET
+7-20:SB_LBRACKET
+Parsing an expression
+7-21:TK_NUMBER(12)
+Expression parsed
+7-23:SB_RBRACKET
+7-25:SB_PLUS
+7-27:TK_IDENT(a)
+7-28:SB_LBRACKET
+Parsing an expression
+7-29:TK_NUMBER(3)
+Expression parsed
+7-30:SB_RBRACKET
+Expression parsed
+Assign statement parsed ....
+7-31:SB_SEMICOLON
+8-1:KW_END
+Block parsed!
+8-4:SB_PERIOD
+Program parsed!
